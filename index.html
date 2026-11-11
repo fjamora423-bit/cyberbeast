@@ -81,6 +81,7 @@ h2{font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:6px}
 #map .d{fill:var(--dot)}
 #map .pin{fill:var(--fg);stroke:var(--panel);stroke-width:1.5;cursor:pointer;transition:r .15s}
 #map .pin.b{fill:var(--panel);stroke:var(--fg);stroke-width:1.6}
+#map .pin.o{fill:var(--muted);stroke:var(--panel)}
 #map .pin.on{fill:var(--led);stroke:var(--led)}
 #map .home{fill:var(--led)}
 #map .homering{fill:none;stroke:var(--led);stroke-width:1.2;opacity:.6}
@@ -165,8 +166,8 @@ h2{font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:6px}
 <header class="hero gut">
   <div class="inner">
     <div class="byline"><span class="etch">Foundation Series</span><span class="label">Prepared by Cisco · Integrity Automotive · Nov 11, 2026</span></div>
-    <h1>25 Cyberbeasts, <em>clean and ready to buy.</em></h1>
-    <p class="sub">Every clean-history 2024 Cyberbeast I could find for sale in the US, checked for title brands and accidents. Tap the trucks you want and send me your picks.</p>
+    <h1><span id="nBeast">29</span> Cyberbeasts, <em>clean and ready to buy.</em></h1>
+    <p class="sub">Every clean-history Cyberbeast I could find for sale in the US, checked for title brands and accidents, plus <span id="nOther">24</span> more Cybertrucks from private owners. Tap the trucks you want and send me your picks.</p>
     <svg class="truck" viewBox="0 0 620 190" role="img" aria-label="Line drawing of a Cybertruck">
       <line class="ground" x1="0" y1="178" x2="620" y2="178"/>
       <path class="body" d="M28 140 L34 110 L300 38 L590 100 L594 140 L528 140 L512 108 L430 108 L414 140 L196 140 L180 108 L98 108 L82 140 Z"/>
@@ -176,9 +177,9 @@ h2{font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:6px}
       <line class="bar" x1="36" y1="108" x2="88" y2="94"/>
     </svg>
     <div class="stats">
-      <div class="stat"><span class="num">25</span><span class="label">Clean trucks</span></div>
-      <div class="stat"><span class="num">$86K</span><span class="label">Lowest price</span></div>
-      <div class="stat"><span class="num">6</span><span class="label">Under 8K miles</span></div>
+      <div class="stat"><span class="num" id="nBeast2">29</span><span class="label">Cyberbeasts</span></div>
+      <div class="stat"><span class="num" id="nPriv">36</span><span class="label">Private sellers</span></div>
+      <div class="stat"><span class="num">$86K</span><span class="label">Lowest Cyberbeast</span></div>
     </div>
   </div>
 </header>
@@ -199,18 +200,19 @@ h2{font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:6px}
     <p class="intro">Tap a dot to jump to that truck.</p>
     <div class="mapbox">
       <svg id="map" viewBox="0 0 470 268" role="img" aria-label="Map of the United States showing where each truck is"></svg>
-      <div class="legend"><span><i></i>Says Foundation</span><span><i class="b"></i>Probably Foundation</span><span><i class="h"></i>Albuquerque</span></div>
+      <div class="legend"><span><i></i>Says Foundation</span><span><i class="b"></i>Other Cyberbeasts</span><span><i class="h"></i>Albuquerque</span></div>
     </div>
   </div></section>
 
   <section class="gut"><div class="inner">
     <h2>The trucks</h2>
-    <p class="intro">"Says Foundation" means the listing says so. "Check sticker" trucks are early 2024 builds from the same run, but the window sticker has to confirm it. Miles from Albuquerque are straight-line.</p>
+    <p class="intro">"Says Foundation" means the listing says so. "Check sticker" trucks are early 2024 builds from the same run, and the window sticker has to confirm it. "Later build" trucks are newer and may not be Foundation. Private sellers have no dealer markup, so they're often the best deals. Miles from Albuquerque are straight-line.</p>
     <div class="controls">
       <div class="seg" role="group" aria-label="Show">
-        <button type="button" data-f="all" aria-pressed="true">All 25</button>
+        <button type="button" data-f="all" aria-pressed="true">Cyberbeasts</button>
         <button type="button" data-f="A" aria-pressed="false">Says Foundation</button>
-        <button type="button" data-f="B" aria-pressed="false">Check sticker</button>
+        <button type="button" data-f="P" aria-pressed="false">Private sellers</button>
+        <button type="button" data-f="O" aria-pressed="false">Other Cybertrucks</button>
       </div>
       <div class="seg" role="group" aria-label="Sort">
         <button type="button" data-s="price" aria-pressed="true">Price</button>
@@ -246,7 +248,7 @@ h2{font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:6px}
     </div>
   </div></section>
 
-  <div class="foot gut"><div class="inner">Found on AutoTrader, CarGurus and Find My Electric on Nov 11, 2026. Prices are asking prices before transport and change daily. Not yet checked: Cars.com, Facebook Marketplace, and the dealer auctions (Manheim, ACV, OPENLANE).</div></div>
+  <div class="foot gut"><div class="inner">Found on AutoTrader, CarGurus, Find My Electric and the Cybertruck Owners Club forum on Nov 11, 2026. Prices are asking prices before transport and change daily. Not yet checked: Cars.com, Facebook Marketplace, and the dealer auctions (Manheim, ACV, OPENLANE).</div></div>
 </main>
 
 <div class="tray" id="tray"><div class="inner">
@@ -256,7 +258,7 @@ h2{font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:6px}
 </div></div>
 
 <script>
-const AT='https://www.autotrader.com/cars-for-sale/vehicle/',CG='https://www.cargurus.com/Cars/inventorylisting/vdp.action?listingId=',FME='https://www.findmyelectric.com/listings/2024-tesla-cybertruck-foundation-cyberbeast-';
+const AT='https://www.autotrader.com/cars-for-sale/vehicle/',CG='https://www.cargurus.com/Cars/inventorylisting/vdp.action?listingId=',FME='https://www.findmyelectric.com/listings/2024-tesla-cybertruck-foundation-cyberbeast-',FMEL='https://www.findmyelectric.com/listings/',CTOC='https://www.cybertruckownersclub.com/forum/threads/';
 // id, group, seller, city, lat, lng, miles, price, note, url, star
 const T=[
 ['a1','A','Birmingham Luxury Motors','Birmingham, AL',33.52,-86.80,21864,89999,'1 owner, no accidents.',AT+'795601084'],
@@ -284,11 +286,43 @@ const T=[
 ['b12','B','Carena Motors','Twinsburg, OH',41.31,-81.44,25436,109999,'1 owner, no accidents.',CG+'463241816'],
 ['b13','B','Carolina Luxury Imports','Denver, NC',35.53,-81.03,13075,119975,'1 owner, no accidents.',AT+'794818610'],
 ['b14','B','J & S Autohaus','Ewing, NJ',40.27,-74.80,2003,124995,'1 owner, no accidents. $124,995 on CarGurus, $134,995 on AutoTrader, so ask which.',AT+'794235542'],
+['c1','C','Private seller','Englewood, CO',39.65,-104.99,5981,99500,'No accidents, 1 owner. Closest Cyberbeast to Albuquerque.',AT+'794563110','','2024 Cyberbeast'],
+['c2','C','Private seller','Desert Hot Springs, CA',33.96,-116.50,8200,97000,'No accidents, 1 owner.',AT+'781704670','','2024 Cyberbeast'],
+['c3','C','Private seller','Austin, TX',30.27,-97.74,17000,105000,'Clean title. Listed Nov 8.',FMEL+'2024-tesla-cybertruck-cyberbeast-423630/','','2024 Cyberbeast'],
+['c4','C','Private seller','Solana Beach, CA',32.99,-117.27,3100,129000,'No accidents, 1 owner. Tan wrap.',AT+'780695853','','2026 Cyberbeast'],
+['o1','O','Private seller','Placitas, NM',35.31,-106.42,21353,74995,'Right next door. No trip needed.',AT+'793140212','Local','2025 RWD'],
+['o2','O','Private seller','Jennings, LA',30.22,-92.66,14400,79900,'Foundation Series. Lifetime FSD, no accidents, garage kept.',CTOC+'2024-tesla-cybertruck-foundation-series-awd-jennings-la-14-400-miles.62943/','','2024 Foundation AWD'],
+['o3','O','Private seller','Waukesha, WI',43.01,-88.23,4612,82000,'Foundation Series, clean title.',FMEL+'2024-tesla-cybertruck-foundation-awd-417132/','','2024 Foundation AWD'],
+['o4','O','Private seller','Stevensville, MT',46.51,-114.09,33050,74000,'Foundation Series, clean title.',FMEL+'2024-tesla-cybertruck-foundation-awd-393995/','','2024 Foundation AWD'],
+['o5','O','Private seller','Suitland, MD',38.85,-76.92,31500,85000,'Foundation Series, clean title.',FMEL+'2024-tesla-cybertruck-foundation-awd-364716/','','2024 Foundation AWD'],
+['o6','O','Private seller','Jacksonville, FL',30.33,-81.66,23137,93000,'Listed as Foundation, clean title.',FMEL+'2025-tesla-cybertruck-foundation-awd-344430/','','2025 Foundation AWD'],
+['o7','O','Private seller','Boca Raton, FL',26.37,-80.13,15000,89900,'Foundation Series. Listed July 2025, may be sold.',FMEL+'2024-tesla-cybertruck-foundation-awd-317403/','','2024 Foundation AWD'],
+['o8','O','Private seller','Los Angeles, CA',34.05,-118.24,1153,110000,'Foundation Series. Listed Sept 2025, may be sold.',FMEL+'2024-tesla-cybertruck-foundation-awd-330027/','','2024 Foundation AWD'],
+['o9','O','Private seller','Mississippi',32.30,-90.18,6000,80000,'Matte black wrap and full PPF, no accidents.',CTOC+'2026-premium-awd-6k-miles-xpel-matte-black-80k.61012/','','2026 Premium AWD'],
+['o10','O','Private seller','Sterling, VA',39.01,-77.43,7651,90900,'Clean title. Listed Nov 9.',FMEL+'2026-tesla-cybertruck-premium-awd-423843/','','2026 Premium AWD'],
+['o11','O','Private seller','Bargersville, IN',39.52,-86.17,12600,94900,'Clean title. Listed Nov 9.',FMEL+'2025-tesla-cybertruck-premium-awd-423844/','','2025 Premium AWD'],
+['o12','O','Private seller','Sacramento, CA',38.58,-121.49,1164,87999,'Nearly new.',AT+'793945770','','2026 AWD'],
+['o13','O','Private seller','Austin, TX',30.30,-97.70,1350,85000,'Nearly new.',AT+'784827093','','2026 AWD'],
+['o14','O','Private seller','Richardson, TX',32.95,-96.73,3500,95000,'Low miles.',AT+'791082567','','2026 AWD'],
+['o15','O','Private seller','Mount Airy, NC',36.50,-80.61,6000,90000,'Low miles.',AT+'795763908','','2026 AWD'],
+['o16','O','Private seller','Clarence Center, NY',43.01,-78.64,20600,89500,'',AT+'795784095','','2024 AWD'],
+['o17','O','Private seller','Vista, CA',33.20,-117.24,31000,90000,'',AT+'781564482','','2024 AWD'],
+['o18','O','Private seller','Frisco, TX',33.15,-96.82,39672,85000,'Clean title. Listed Nov 7.',FMEL+'2024-tesla-cybertruck-awd-423429/','','2024 AWD'],
+['o19','O','Private seller','Land O Lakes, FL',28.22,-82.46,22203,80000,'',AT+'781301970','','2024 AWD'],
+['o20','O','Private seller','Overland Park, KS',38.98,-94.67,29000,79999,'',AT+'773152192','','2024 AWD'],
+['o21','O','Private seller','Nampa, ID',43.54,-116.56,35487,79995,'',AT+'785697400','','2024 AWD'],
+['o22','O','Private seller','Charlotte, NC',35.23,-80.84,51000,81300,'High miles.',AT+'786085365','','2025 AWD'],
+['o23','O','Private seller','Florence, MS',32.15,-90.13,9400,72500,'Clean title. Listed Aug 2025, may be sold.',FMEL+'2024-tesla-cybertruck-awd-323093/','','2024 AWD'],
+['o24','O','Private seller','Senecaville, OH',39.93,-81.45,68000,69900,'Clean title, high miles.',FMEL+'2024-tesla-cybertruck-awd-423110/','','2024 AWD'],
 ];
 const HOME=[35.08,-106.65];
 const money=n=>'$'+n.toLocaleString('en-US');
 function miles(a,b,c,d){const R=3959,r=x=>x*Math.PI/180,dl=r(c-a),dn=r(d-b);const h=Math.sin(dl/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(dn/2)**2;return Math.round(2*R*Math.asin(Math.sqrt(h)));}
-const trucks=T.map(([id,g,s,c,lat,lng,mi,p,n,u,star])=>({id,g,s,c,lat,lng,mi,p,n,u,star,dist:miles(HOME[0],HOME[1],lat,lng)}));
+const trucks=T.map(([id,g,s,c,lat,lng,mi,p,n,u,star,m])=>({id,g,s,c,lat,lng,mi,p,n,u,star,m:m||'2024 Cyberbeast',pv:s==='Private seller',dist:miles(HOME[0],HOME[1],lat,lng)}));
+const beasts=trucks.filter(t=>t.g!=='O');
+document.getElementById('nBeast').textContent=beasts.length;document.getElementById('nBeast2').textContent=beasts.length;
+document.getElementById('nPriv').textContent=trucks.filter(t=>t.pv).length;
+document.getElementById('nOther').textContent=trucks.filter(t=>t.g==='O').length;
 
 /* Map: dot matrix inside a coarse lower-48 outline */
 const OUT=[[-124.7,48.4],[-123,48.3],[-123,49],[-95.2,49],[-95.2,49.4],[-94.6,48.7],[-89.6,48],[-84.6,46.5],[-84.1,46],[-83.4,45.2],[-82.4,43],[-83.1,42.1],[-82.7,41.7],[-79.8,42.2],[-79,43.3],[-76.3,43.6],[-75.3,45],[-71.5,45],[-69.2,47.4],[-67.8,47],[-67,44.8],[-70.2,43.6],[-70.6,42.6],[-70,41.7],[-71.9,41.3],[-74,40.6],[-74.1,39.6],[-75,38.8],[-76,37],[-75.5,35.3],[-77,34.6],[-79,33.3],[-81,32],[-81.4,30.5],[-80.6,28.5],[-80.1,26.8],[-80.4,25.2],[-81.2,25.3],[-81.8,26.7],[-82.7,28.2],[-82.8,29.2],[-84,30],[-85.4,29.7],[-86.5,30.4],[-88,30.4],[-89.6,30.2],[-89.2,29.2],[-90.5,29.1],[-92,29.6],[-94,29.6],[-95,29],[-97.2,27.6],[-97.4,26],[-99.1,26.5],[-100.4,28.3],[-101.4,29.8],[-102.6,29.8],[-103.1,29],[-104.5,29.6],[-106.5,31.8],[-108.2,31.8],[-111,31.3],[-114.8,32.5],[-117.1,32.5],[-118.4,34],[-120.6,34.6],[-121.9,36.6],[-122.5,37.8],[-123.8,39.8],[-124.2,41.9],[-124.5,43.5],[-123.9,46.2]];
@@ -301,9 +335,9 @@ map.appendChild(el('circle',{class:'homering',cx:px(HOME[1]),cy:py(HOME[0]),r:9}
 map.appendChild(el('circle',{class:'home',cx:px(HOME[1]),cy:py(HOME[0]),r:4.5}));
 const lab=el('text',{x:px(HOME[1])-28,y:py(HOME[0])+22});lab.textContent='ALBUQUERQUE';map.appendChild(lab);
 const pins={};
-for(const t of trucks){const c=el('circle',{class:'pin '+(t.g==='B'?'b':''),cx:px(t.lng),cy:py(t.lat),r:5,tabindex:0});
+for(const t of trucks){const c=el('circle',{class:'pin '+({A:'',B:'b',C:'b',O:'o'}[t.g]),cx:px(t.lng),cy:py(t.lat),r:t.g==='O'?4:5,tabindex:0});
   const ti=el('title',{});ti.textContent=`${t.s}, ${t.c} · ${money(t.p)}`;c.appendChild(ti);
-  const go=()=>{const card=document.getElementById('c-'+t.id);if(card.hidden){setFilter('all');}document.getElementById('c-'+t.id).scrollIntoView({behavior:'smooth',block:'center'});flash(t.id);};
+  const go=()=>{const card=document.getElementById('c-'+t.id);if(card.hidden){setFilter(t.g==='O'?'O':'all');}document.getElementById('c-'+t.id).scrollIntoView({behavior:'smooth',block:'center'});flash(t.id);};
   c.addEventListener('click',go);c.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
   map.appendChild(c);pins[t.id]=c;}
 
@@ -312,9 +346,9 @@ let picks=new Set();try{picks=new Set(JSON.parse(localStorage.getItem('cb-picks'
 const list=document.getElementById('list');
 const check='<svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3" fill="none" stroke="#0d0f12" stroke-width="2.2"/></svg>';
 for(const t of trucks){const l=document.createElement('label');l.className='card';l.id='c-'+t.id;l.htmlFor=t.id;
-  const tags=(t.g==='A'?'<span class="tag fs">Says Foundation</span>':'<span class="tag chk">Check sticker</span>')+(t.star?`<span class="tag star">${t.star}</span>`:'');
+  const tags=({A:'<span class="tag fs">Says Foundation</span>',B:'<span class="tag chk">Check sticker</span>',C:'<span class="tag chk">Later build</span>',O:''}[t.g])+(t.star?`<span class="tag star">${t.star}</span>`:'');
   l.innerHTML=`<input type="checkbox" id="${t.id}"><span class="box">${check}</span>
-  <div class="who"><div class="seller">${t.s} ${tags}</div><div class="where">${t.c} · <span class="num">${t.dist.toLocaleString('en-US')}</span> mi from ABQ</div>
+  <div class="who"><div class="seller">${t.s} ${tags}</div><div class="where">${t.m} · ${t.c} · <span class="num">${t.dist.toLocaleString('en-US')}</span> mi from ABQ</div>
   <div class="note">${t.n} <a href="${t.u}" target="_blank" rel="noopener">See listing ↗</a></div></div>
   <div class="right"><div class="price">${money(t.p)}</div><div class="mi">${t.mi.toLocaleString('en-US')} mi</div><div class="meter" title="Miles out of 40,000"><span style="width:${Math.min(100,t.mi/400)}%"></span></div></div>`;
   const box=l.querySelector('input');box.checked=picks.has(t.id);
@@ -326,7 +360,7 @@ function flash(id){const c=document.getElementById('c-'+id);c.style.borderColor=
 let filt='all',sort='price';
 function setFilter(f){filt=f;document.querySelectorAll('[data-f]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));apply();}
 function apply(){const arr=[...trucks].sort((a,b)=>a[sort==='price'?'p':sort]-b[sort==='price'?'p':sort]);
-  for(const t of arr){const c=document.getElementById('c-'+t.id);c.hidden=!(filt==='all'||t.g===filt);list.appendChild(c);}}
+  for(const t of arr){const c=document.getElementById('c-'+t.id);c.hidden=!((filt==='all'&&t.g!=='O')||t.g===filt||(filt==='P'&&t.pv));pins[t.id].style.display=c.hidden?'none':'';list.appendChild(c);}}
 document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.f)));
 document.querySelectorAll('[data-s]').forEach(b=>b.addEventListener('click',()=>{sort=b.dataset.s;document.querySelectorAll('[data-s]').forEach(x=>x.setAttribute('aria-pressed',x===b));apply();}));
 
