@@ -152,7 +152,14 @@ h2{font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:6px}
   .stat{padding:10px 10px}
   .card{grid-template-columns:auto 1fr;padding:14px}
   .right{grid-column:2;justify-items:start;text-align:left;grid-auto-flow:column;align-items:center;gap:12px}
+  .tray{padding-top:9px;padding-bottom:calc(9px + env(safe-area-inset-bottom,0px))}
+  .tray .inner{flex-wrap:nowrap}
+  .tray .count{font-size:13px}
+  .tray .total{font-size:18px}
+  .tray button{padding:7px 10px;font-size:13px}
+  .tray .msg{position:absolute;left:16px;right:16px;bottom:100%;background:var(--fg);padding:8px 0 4px}
 }
+#clear[hidden]{display:none}
 </style>
 
 <header class="hero gut">
@@ -328,6 +335,7 @@ function sync(){const on=trucks.filter(t=>picks.has(t.id));
   for(const t of trucks){document.getElementById('c-'+t.id).classList.toggle('on',picks.has(t.id));pins[t.id].classList.toggle('on',picks.has(t.id));}
   document.getElementById('count').textContent=on.length?`${on.length} ${on.length===1?'truck':'trucks'} picked`:'No trucks picked yet';
   document.getElementById('total').textContent=money(on.reduce((s,t)=>s+t.p,0));
+  document.getElementById('clear').hidden=!on.length;
   msg.hidden=true;try{localStorage.setItem('cb-picks',JSON.stringify([...picks]))}catch(e){}}
 document.getElementById('clear').addEventListener('click',()=>{picks.clear();document.querySelectorAll('.card input').forEach(i=>i.checked=false);sync();});
 document.getElementById('copy').addEventListener('click',()=>{const on=trucks.filter(t=>picks.has(t.id));
