@@ -1,0 +1,343 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<meta name="robots" content="noindex">
+<style>:root{padding-top:env(safe-area-inset-top,0px);padding-bottom:env(safe-area-inset-bottom,0px)}body{margin:0}img{max-width:100%}[hidden]{display:none!important}</style>
+</head>
+<body>
+<title>Cyberbeast Foundation Buy List</title>
+<meta name="claude:viewport-fit-sides" content="cover">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=IBM+Plex+Sans:wght@400;500;600&family=IBM+Plex+Mono:wght@500;600&display=swap">
+<style>
+/* Layout: brushed-steel hero with a line-drawn truck, a dot-matrix US map of every truck, then a filterable list; picks gather in a tray pinned to the bottom */
+:root{
+  --bg:#e6e9ec; --panel:#f6f7f8; --panel2:#dde1e5; --fg:#15181c; --muted:#59626c; --line:#c7cdd3;
+  --steel1:#f3f5f7; --steel2:#c4cad0; --dot:#b3bac2;
+  --led:#1b6fb8; --ledsoft:#d6e7f6; --warn:#a33a28; --warnsoft:#f3dfda; --ok:#2a6b4c;
+  --display:"Chakra Petch","Arial Narrow",system-ui,sans-serif;
+  --body:"IBM Plex Sans",system-ui,-apple-system,sans-serif;
+  --mono:"IBM Plex Mono",ui-monospace,Menlo,monospace;
+}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){
+  --bg:#0d0f12; --panel:#15181c; --panel2:#1d2126; --fg:#eceff2; --muted:#8e98a3; --line:#272c33;
+  --steel1:#3b424a; --steel2:#171a1f; --dot:#2b3139;
+  --led:#8fd0ff; --ledsoft:#14283a; --warn:#ff8c78; --warnsoft:#2c1915; --ok:#7fd6a8; color-scheme:dark}}
+:root[data-theme="dark"]{
+  --bg:#0d0f12; --panel:#15181c; --panel2:#1d2126; --fg:#eceff2; --muted:#8e98a3; --line:#272c33;
+  --steel1:#3b424a; --steel2:#171a1f; --dot:#2b3139;
+  --led:#8fd0ff; --ledsoft:#14283a; --warn:#ff8c78; --warnsoft:#2c1915; --ok:#7fd6a8; color-scheme:dark}
+*{box-sizing:border-box}
+body{background:var(--bg);color:var(--fg);font-family:var(--body);font-size:15px;line-height:1.55}
+body::before{content:"";position:fixed;inset:0 0 auto;height:env(safe-area-inset-top,0px);z-index:10;background:var(--bg)}
+.gut{padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px))}
+.inner{max-width:960px;margin:0 auto}
+h1,h2,h3{font-family:var(--display);margin:0;text-wrap:balance}
+.num{font-family:var(--mono);font-variant-numeric:tabular-nums}
+.label{font-size:11.5px;letter-spacing:.14em;text-transform:uppercase;color:var(--muted);font-weight:600}
+
+/* Hero */
+.hero{position:relative;overflow:hidden;background:
+  repeating-linear-gradient(90deg,rgba(255,255,255,.035) 0 1px,transparent 1px 3px),
+  linear-gradient(160deg,var(--steel1),var(--steel2));border-bottom:1px solid var(--line)}
+.hero .inner{padding-block:36px 30px;display:grid;gap:22px}
+.byline{display:flex;flex-wrap:wrap;gap:6px 14px;align-items:center}
+.etch{font-family:var(--display);font-weight:600;font-size:12px;letter-spacing:.24em;text-transform:uppercase;border:1px solid currentColor;padding:4px 10px;color:var(--muted)}
+h1{font-size:clamp(34px,7.4vw,64px);line-height:1;letter-spacing:-.01em;font-weight:700;max-width:14ch}
+h1 em{font-style:normal;color:var(--led)}
+.sub{max-width:58ch;color:var(--muted);margin:0;font-size:16px}
+.truck{width:100%;max-width:640px;height:auto;justify-self:end;margin-top:-8px}
+.truck .body{fill:var(--panel2);stroke:var(--fg);stroke-width:2;stroke-linejoin:miter;opacity:.9}
+.truck .trace{fill:none;stroke:var(--led);stroke-width:2.5;stroke-dasharray:1400;stroke-dashoffset:0;filter:drop-shadow(0 0 6px var(--led))}
+.truck .wheel{fill:var(--bg);stroke:var(--fg);stroke-width:2}
+.truck .hub{fill:none;stroke:var(--muted);stroke-width:1.5}
+.truck .bar{stroke:var(--led);stroke-width:4;stroke-linecap:square;filter:drop-shadow(0 0 8px var(--led))}
+.truck .ground{stroke:var(--line);stroke-width:1.5}
+@media (prefers-reduced-motion:no-preference){
+  .truck .trace{animation:draw 2.2s cubic-bezier(.6,0,.2,1) .2s both}
+  .truck .bar{animation:flick 1.2s ease-out 1.9s both}
+  @keyframes draw{from{stroke-dashoffset:1400}to{stroke-dashoffset:0}}
+  @keyframes flick{0%{opacity:.25}20%{opacity:1}30%{opacity:.4}45%,100%{opacity:1}}
+}
+.stats{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:1px;background:var(--line);border:1px solid var(--line)}
+.stat{background:var(--panel);padding:14px 16px;display:grid;gap:2px;min-width:0}
+.stat .num{font-size:clamp(22px,4.6vw,34px);font-weight:600;line-height:1.1}
+.stat .label{letter-spacing:.08em}
+
+section{padding-block:40px 8px}
+h2{font-size:clamp(22px,4vw,30px);font-weight:700;margin-bottom:6px}
+.intro{color:var(--muted);margin:0 0 18px;max-width:62ch}
+
+/* Why now */
+.why{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px}
+.why div{border-top:2px solid var(--fg);padding-top:12px;min-width:0}
+.why .num{font-size:24px;font-weight:600;display:block;margin-bottom:4px}
+.why p{margin:0;color:var(--muted);font-size:14.5px}
+
+/* Map */
+.mapbox{background:var(--panel);border:1px solid var(--line);padding:14px;position:relative}
+#map{width:100%;height:auto;display:block}
+#map .d{fill:var(--dot)}
+#map .pin{fill:var(--fg);stroke:var(--panel);stroke-width:1.5;cursor:pointer;transition:r .15s}
+#map .pin.b{fill:var(--panel);stroke:var(--fg);stroke-width:1.6}
+#map .pin.on{fill:var(--led);stroke:var(--led)}
+#map .home{fill:var(--led)}
+#map .homering{fill:none;stroke:var(--led);stroke-width:1.2;opacity:.6}
+#map text{font-family:var(--display);font-size:9px;fill:var(--led);letter-spacing:.1em;font-weight:600}
+.legend{display:flex;flex-wrap:wrap;gap:6px 18px;margin-top:10px;font-size:13px;color:var(--muted)}
+.legend i{display:inline-block;width:10px;height:10px;border-radius:50%;margin-right:6px;vertical-align:-1px;background:var(--fg)}
+.legend i.b{background:transparent;border:1.6px solid var(--fg)}
+.legend i.h{background:var(--led)}
+
+/* Controls */
+.controls{display:flex;flex-wrap:wrap;gap:10px 16px;align-items:center;justify-content:space-between;margin-bottom:14px}
+.seg{display:inline-flex;border:1px solid var(--line);background:var(--panel)}
+.seg button{font:inherit;font-size:13.5px;font-weight:500;color:var(--muted);background:transparent;border:0;padding:8px 12px;cursor:pointer}
+.seg button[aria-pressed="true"]{background:var(--fg);color:var(--bg)}
+.seg button:focus-visible,.card:focus-within,.tray button:focus-visible{outline:2px solid var(--led);outline-offset:2px}
+
+/* Cards */
+.list{display:grid;gap:10px}
+.card{display:grid;grid-template-columns:auto 1fr auto;gap:6px 16px;align-items:center;background:var(--panel);border:1px solid var(--line);padding:16px 18px;cursor:pointer;position:relative;transition:border-color .15s,background .15s}
+.card:hover{border-color:var(--muted)}
+.card.on{border-color:var(--led);background:var(--ledsoft)}
+.card input{position:absolute;opacity:0;pointer-events:none}
+.box{width:24px;height:24px;border:1.6px solid var(--muted);display:grid;place-items:center;clip-path:polygon(0 0,100% 0,100% 70%,70% 100%,0 100%)}
+.card.on .box{background:var(--led);border-color:var(--led)}
+.box svg{width:14px;height:14px;opacity:0}
+.card.on .box svg{opacity:1}
+.who{min-width:0}
+.seller{font-weight:600;font-size:16px;display:flex;flex-wrap:wrap;gap:4px 8px;align-items:center}
+.tag{font-family:var(--display);font-size:10.5px;font-weight:600;letter-spacing:.12em;text-transform:uppercase;padding:2px 7px;border:1px solid currentColor}
+.tag.fs{color:var(--ok)}
+.tag.chk{color:var(--muted)}
+.tag.star{color:var(--led)}
+.where{color:var(--muted);font-size:13.5px}
+.note{font-size:13.5px;margin-top:4px;color:var(--fg)}
+.note a{color:var(--led);font-weight:500;white-space:nowrap}
+.right{text-align:right;display:grid;gap:4px;justify-items:end}
+.price{font-family:var(--mono);font-size:21px;font-weight:600;font-variant-numeric:tabular-nums}
+.mi{font-family:var(--mono);font-size:12.5px;color:var(--muted)}
+.meter{width:96px;height:4px;background:var(--panel2);position:relative}
+.meter span{position:absolute;inset:0 auto 0 0;background:var(--fg)}
+
+/* Skip + checklist */
+.skip{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.skip div{background:var(--warnsoft);padding:10px 14px;font-size:14px;min-width:0}
+.skip b{color:var(--warn);font-weight:600}
+.steps{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:22px;counter-reset:s}
+.steps div{counter-increment:s;min-width:0}
+.steps div::before{content:counter(s);font-family:var(--display);font-weight:700;font-size:28px;color:var(--led);display:block;line-height:1;margin-bottom:6px}
+.steps b{display:block;font-family:var(--display);font-size:17px}
+.steps p{margin:2px 0 0;color:var(--muted);font-size:14.5px}
+.foot{padding-block:36px 140px;color:var(--muted);font-size:13px}
+
+/* Tray */
+.tray{position:fixed;left:0;right:0;bottom:0;z-index:20;background:var(--fg);color:var(--bg);
+  padding-left:max(16px,env(safe-area-inset-left,0px));padding-right:max(16px,env(safe-area-inset-right,0px));
+  padding-top:12px;padding-bottom:calc(12px + env(safe-area-inset-bottom,0px));transform:translateY(0);transition:transform .25s}
+.tray .inner{display:flex;flex-wrap:wrap;gap:8px 16px;align-items:center;justify-content:space-between}
+.tray .count{font-family:var(--display);font-size:15px;font-weight:600;letter-spacing:.04em}
+.tray .total{font-family:var(--mono);font-size:22px;font-weight:600}
+.tray .btns{display:flex;gap:8px}
+.tray button{font:inherit;font-size:14px;font-weight:600;border:1px solid currentColor;background:transparent;color:inherit;padding:8px 14px;cursor:pointer}
+.tray button.primary{background:var(--led);border-color:var(--led);color:#0d0f12}
+.tray .msg{width:100%;font-size:13px;opacity:.85}
+.tray textarea{width:100%;height:90px;font:12px var(--mono);margin-top:6px}
+
+@media (max-width:640px){
+  .stats,.why,.steps,.skip{grid-template-columns:1fr}
+  .stats{grid-template-columns:repeat(3,minmax(0,1fr))}
+  .stat{padding:10px 10px}
+  .card{grid-template-columns:auto 1fr;padding:14px}
+  .right{grid-column:2;justify-items:start;text-align:left;grid-auto-flow:column;align-items:center;gap:12px}
+}
+</style>
+
+<header class="hero gut">
+  <div class="inner">
+    <div class="byline"><span class="etch">Foundation Series</span><span class="label">Prepared by Cisco · Integrity Automotive · Nov 11, 2026</span></div>
+    <h1>25 Cyberbeasts, <em>clean and ready to buy.</em></h1>
+    <p class="sub">Every clean-history 2024 Cyberbeast I could find for sale in the US, checked for title brands and accidents. Tap the trucks you want and send me your picks.</p>
+    <svg class="truck" viewBox="0 0 620 190" role="img" aria-label="Line drawing of a Cybertruck">
+      <line class="ground" x1="0" y1="178" x2="620" y2="178"/>
+      <path class="body" d="M28 140 L34 110 L300 38 L590 100 L594 140 L528 140 L512 108 L430 108 L414 140 L196 140 L180 108 L98 108 L82 140 Z"/>
+      <path class="trace" d="M28 140 L34 110 L300 38 L590 100 L594 140 L528 140 L512 108 L430 108 L414 140 L196 140 L180 108 L98 108 L82 140 Z"/>
+      <circle class="wheel" cx="139" cy="146" r="31"/><circle class="hub" cx="139" cy="146" r="16"/>
+      <circle class="wheel" cx="471" cy="146" r="31"/><circle class="hub" cx="471" cy="146" r="16"/>
+      <line class="bar" x1="36" y1="108" x2="88" y2="94"/>
+    </svg>
+    <div class="stats">
+      <div class="stat"><span class="num">25</span><span class="label">Clean trucks</span></div>
+      <div class="stat"><span class="num">$86K</span><span class="label">Lowest price</span></div>
+      <div class="stat"><span class="num">6</span><span class="label">Under 8K miles</span></div>
+    </div>
+  </div>
+</header>
+
+<main>
+  <section class="gut"><div class="inner">
+    <h2>Why buy now</h2>
+    <p class="intro">Supply is drying up and the new-truck price just went up.</p>
+    <div class="why">
+      <div><span class="num">Mid-2027</span><p>Tesla says the Cybertruck ends production. Clean Foundation trucks won't get easier to find.</p></div>
+      <div><span class="num">$109,990</span><p>The only new Cybertruck Tesla still sells, as of Nov 10. It's a Cyberbeast with no FSD. The Foundation Series came with FSD, lifetime connectivity and accessories.</p></div>
+      <div><span class="num">3</span><p>Used Cybertrucks in Tesla's own stock nationwide, none of them Cyberbeasts. All 10 at CarMax are on hold.</p></div>
+    </div>
+  </div></section>
+
+  <section class="gut"><div class="inner">
+    <h2>Where they are</h2>
+    <p class="intro">Tap a dot to jump to that truck.</p>
+    <div class="mapbox">
+      <svg id="map" viewBox="0 0 470 268" role="img" aria-label="Map of the United States showing where each truck is"></svg>
+      <div class="legend"><span><i></i>Says Foundation</span><span><i class="b"></i>Probably Foundation</span><span><i class="h"></i>Albuquerque</span></div>
+    </div>
+  </div></section>
+
+  <section class="gut"><div class="inner">
+    <h2>The trucks</h2>
+    <p class="intro">"Says Foundation" means the listing says so. "Check sticker" trucks are early 2024 builds from the same run, but the window sticker has to confirm it. Miles from Albuquerque are straight-line.</p>
+    <div class="controls">
+      <div class="seg" role="group" aria-label="Show">
+        <button type="button" data-f="all" aria-pressed="true">All 25</button>
+        <button type="button" data-f="A" aria-pressed="false">Says Foundation</button>
+        <button type="button" data-f="B" aria-pressed="false">Check sticker</button>
+      </div>
+      <div class="seg" role="group" aria-label="Sort">
+        <button type="button" data-s="price" aria-pressed="true">Price</button>
+        <button type="button" data-s="mi" aria-pressed="false">Miles</button>
+        <button type="button" data-s="dist" aria-pressed="false">Closest</button>
+      </div>
+    </div>
+    <div class="list" id="list"></div>
+  </div></section>
+
+  <section class="gut"><div class="inner">
+    <h2>Before paying for any truck</h2>
+    <p class="intro">Three checks that protect the money.</p>
+    <div class="steps">
+      <div><b>Window sticker</b><p>It has to say Foundation Series.</p></div>
+      <div><b>FSD on screen</b><p>Get a photo of Controls &gt; Software showing Full Self-Driving. Tesla has pulled FSD from resold cars before.</p></div>
+      <div><b>Carfax</b><p>Run it even when the listing says clean.</p></div>
+    </div>
+  </div></section>
+
+  <section class="gut"><div class="inner">
+    <h2>Left off the list</h2>
+    <p class="intro">These look cheap, but each one has a history problem.</p>
+    <div class="skip">
+      <div>Birmingham Luxury Motors, AL · $88,999 · <b>salvage title</b></div>
+      <div>Automotive Avenues, NJ · $79,995 · <b>salvage title</b></div>
+      <div>Reel Deal Auto, UT · $74,900 · <b>rebuilt, front-end damage</b></div>
+      <div>Patriot Hyundai, OK · $125,000 · <b>accident reported</b></div>
+      <div>Kian Motors, TX · $87,988 · <b>salvage title</b></div>
+      <div>VINS MD, Baltimore · $86,980 and $84,980 · <b>salvage titles</b></div>
+      <div>Parkline Motors, UT · $74,276 and $73,136 · <b>branded titles</b></div>
+      <div>JC Lewis Ford and Legacy Motorcars, GA · <b>accidents reported</b></div>
+    </div>
+  </div></section>
+
+  <div class="foot gut"><div class="inner">Found on AutoTrader, CarGurus and Find My Electric on Nov 11, 2026. Prices are asking prices before transport and change daily. Not yet checked: Cars.com, Facebook Marketplace, and the dealer auctions (Manheim, ACV, OPENLANE).</div></div>
+</main>
+
+<div class="tray" id="tray"><div class="inner">
+  <div><div class="count" id="count">No trucks picked yet</div><div class="total" id="total">$0</div></div>
+  <div class="btns"><button type="button" id="clear">Clear</button><button type="button" class="primary" id="copy">Copy my picks</button></div>
+  <div class="msg" id="msg" hidden></div>
+</div></div>
+
+<script>
+const AT='https://www.autotrader.com/cars-for-sale/vehicle/',CG='https://www.cargurus.com/Cars/inventorylisting/vdp.action?listingId=',FME='https://www.findmyelectric.com/listings/2024-tesla-cybertruck-foundation-cyberbeast-';
+// id, group, seller, city, lat, lng, miles, price, note, url, star
+const T=[
+['a1','A','Birmingham Luxury Motors','Birmingham, AL',33.52,-86.80,21864,89999,'1 owner, no accidents.',AT+'795601084'],
+['a2','A','VINS','Manassas Park, VA',38.78,-77.47,7603,91990,'1 owner, no accidents. Listed 4 days ago.',AT+'795663855','Best value'],
+['a3','A','Private seller','Whittier, CA',33.98,-118.03,21000,92500,'Clean title, Tactical Gray interior, FSD.',FME+'399446/'],
+['a4','A','Private seller','Johnston, IA',41.67,-93.70,38754,92900,'No accidents.',AT+'795697190'],
+['a5','A','Private seller','Aliso Viejo, CA',33.57,-117.73,26500,99300,'No accidents. Listed 119 days.',AT+'785660873'],
+['a6','A','Honda of Denton','Denton, TX',33.21,-97.13,4710,101820,'1 owner, no accidents. Listed 83 days, so there is room to negotiate.',AT+'788804009','Closest'],
+['a7','A','Honda of Denton','Denton, TX',33.215,-97.10,7829,104998,'1 owner, no accidents. Black, likely a wrap. Ask for a 2-truck price.',AT+'793807730'],
+['a8','A','Zoom Auto','Dumfries, VA',38.57,-77.33,4685,105995,'No accidents, 2+ owners. Listed 96 days.',AT+'787690291'],
+['a9','A','Private seller','Bowling Green, KY',36.99,-86.44,21000,115000,'Clean title, loaded.',FME+'367127/'],
+['a10','A','Private seller','Appleton, WI',44.26,-88.42,9000,120000,'The ad says both 5,000 and 9,000 miles. Listed since Dec 2025.',FME+'348100/'],
+['a11','A','Private seller','Murrysville, PA',40.43,-79.70,25000,150000,'One of the first 50 built, wrapped.',FME+'323821/','Collector'],
+['b1','B','Philpott Ford','Nederland, TX',29.97,-93.99,26560,86219,'1 owner, no accidents. Cheapest clean one.',AT+'795786164'],
+['b2','B','Mercedes-Benz of Bellevue','Bellevue, WA',47.61,-122.20,7691,91992,'1 owner, no accidents. Listed 1 day ago.',AT+'795820147','Best value'],
+['b3','B','Omega Motorsports','Fayetteville, NC',35.05,-78.88,16793,92000,'1 owner, no accidents. Listed 162 days.',CG+'449700709'],
+['b4','B','Private seller','Plainfield, NJ',40.63,-74.41,8629,92900,'No accidents. Listed 153 days.',AT+'782833961'],
+['b5','B','Private seller','Cincinnati, OH',39.10,-84.51,21492,92900,'No accidents. Listed 154 days.',AT+'782772713'],
+['b6','B','Century Auto','Daly City, CA',37.69,-122.47,26248,94985,'1 owner, no accidents. One of the first few hundred built.',CG+'463178773'],
+['b7','B','Bristol Auto Mall','Levittown, PA',40.16,-74.83,22755,94995,'1 owner, no accidents.',AT+'794745754'],
+['b8','B','Modern Motorcars','Nixa, MO',37.04,-93.29,29305,97999,'1 owner, no accidents.',CG+'463954932'],
+['b9','B','Gravity Autos','Hollywood, FL',26.01,-80.15,23664,98999,'1 owner, no accidents.',AT+'794319592'],
+['b10','B','Gilstrap','Greenville, SC',34.85,-82.40,15000,99863,'No accidents, 2+ owners.',AT+'793335640'],
+['b11','B','Wolf’s Elite Autos','Wilmington, DE',39.74,-75.55,11244,109950,'No accidents. Listed 820 days, so the price is stale.',AT+'723294705'],
+['b12','B','Carena Motors','Twinsburg, OH',41.31,-81.44,25436,109999,'1 owner, no accidents.',CG+'463241816'],
+['b13','B','Carolina Luxury Imports','Denver, NC',35.53,-81.03,13075,119975,'1 owner, no accidents.',AT+'794818610'],
+['b14','B','J & S Autohaus','Ewing, NJ',40.27,-74.80,2003,124995,'1 owner, no accidents. $124,995 on CarGurus, $134,995 on AutoTrader, so ask which.',AT+'794235542'],
+];
+const HOME=[35.08,-106.65];
+const money=n=>'$'+n.toLocaleString('en-US');
+function miles(a,b,c,d){const R=3959,r=x=>x*Math.PI/180,dl=r(c-a),dn=r(d-b);const h=Math.sin(dl/2)**2+Math.cos(r(a))*Math.cos(r(c))*Math.sin(dn/2)**2;return Math.round(2*R*Math.asin(Math.sqrt(h)));}
+const trucks=T.map(([id,g,s,c,lat,lng,mi,p,n,u,star])=>({id,g,s,c,lat,lng,mi,p,n,u,star,dist:miles(HOME[0],HOME[1],lat,lng)}));
+
+/* Map: dot matrix inside a coarse lower-48 outline */
+const OUT=[[-124.7,48.4],[-123,48.3],[-123,49],[-95.2,49],[-95.2,49.4],[-94.6,48.7],[-89.6,48],[-84.6,46.5],[-84.1,46],[-83.4,45.2],[-82.4,43],[-83.1,42.1],[-82.7,41.7],[-79.8,42.2],[-79,43.3],[-76.3,43.6],[-75.3,45],[-71.5,45],[-69.2,47.4],[-67.8,47],[-67,44.8],[-70.2,43.6],[-70.6,42.6],[-70,41.7],[-71.9,41.3],[-74,40.6],[-74.1,39.6],[-75,38.8],[-76,37],[-75.5,35.3],[-77,34.6],[-79,33.3],[-81,32],[-81.4,30.5],[-80.6,28.5],[-80.1,26.8],[-80.4,25.2],[-81.2,25.3],[-81.8,26.7],[-82.7,28.2],[-82.8,29.2],[-84,30],[-85.4,29.7],[-86.5,30.4],[-88,30.4],[-89.6,30.2],[-89.2,29.2],[-90.5,29.1],[-92,29.6],[-94,29.6],[-95,29],[-97.2,27.6],[-97.4,26],[-99.1,26.5],[-100.4,28.3],[-101.4,29.8],[-102.6,29.8],[-103.1,29],[-104.5,29.6],[-106.5,31.8],[-108.2,31.8],[-111,31.3],[-114.8,32.5],[-117.1,32.5],[-118.4,34],[-120.6,34.6],[-121.9,36.6],[-122.5,37.8],[-123.8,39.8],[-124.2,41.9],[-124.5,43.5],[-123.9,46.2]];
+function inside(x,y){let c=false;for(let i=0,j=OUT.length-1;i<OUT.length;j=i++){const[xi,yi]=OUT[i],[xj,yj]=OUT[j];if(((yi>y)!==(yj>y))&&(x<(xj-xi)*(y-yi)/(yj-yi)+xi))c=!c;}return c;}
+const K=10,CX=Math.cos(38*Math.PI/180),px=lng=>(lng+125.5)*K*CX+4,py=lat=>(50-lat)*K+8;
+const NS='http://www.w3.org/2000/svg',map=document.getElementById('map');
+function el(t,a){const e=document.createElementNS(NS,t);for(const k in a)e.setAttribute(k,a[k]);return e;}
+for(let lat=49.4;lat>24.5;lat-=.8){for(let lng=-125;lng<-66.5;lng+=.8/CX*.9){if(inside(lng,lat))map.appendChild(el('circle',{class:'d',cx:px(lng).toFixed(1),cy:py(lat).toFixed(1),r:1.6}));}}
+map.appendChild(el('circle',{class:'homering',cx:px(HOME[1]),cy:py(HOME[0]),r:9}));
+map.appendChild(el('circle',{class:'home',cx:px(HOME[1]),cy:py(HOME[0]),r:4.5}));
+const lab=el('text',{x:px(HOME[1])-28,y:py(HOME[0])+22});lab.textContent='ALBUQUERQUE';map.appendChild(lab);
+const pins={};
+for(const t of trucks){const c=el('circle',{class:'pin '+(t.g==='B'?'b':''),cx:px(t.lng),cy:py(t.lat),r:5,tabindex:0});
+  const ti=el('title',{});ti.textContent=`${t.s}, ${t.c} · ${money(t.p)}`;c.appendChild(ti);
+  const go=()=>{const card=document.getElementById('c-'+t.id);if(card.hidden){setFilter('all');}document.getElementById('c-'+t.id).scrollIntoView({behavior:'smooth',block:'center'});flash(t.id);};
+  c.addEventListener('click',go);c.addEventListener('keydown',e=>{if(e.key==='Enter')go();});
+  map.appendChild(c);pins[t.id]=c;}
+
+/* List */
+let picks=new Set();try{picks=new Set(JSON.parse(localStorage.getItem('cb-picks')||'[]'))}catch(e){}
+const list=document.getElementById('list');
+const check='<svg viewBox="0 0 14 14"><path d="M2 7.5 L5.5 11 L12 3" fill="none" stroke="#0d0f12" stroke-width="2.2"/></svg>';
+for(const t of trucks){const l=document.createElement('label');l.className='card';l.id='c-'+t.id;l.htmlFor=t.id;
+  const tags=(t.g==='A'?'<span class="tag fs">Says Foundation</span>':'<span class="tag chk">Check sticker</span>')+(t.star?`<span class="tag star">${t.star}</span>`:'');
+  l.innerHTML=`<input type="checkbox" id="${t.id}"><span class="box">${check}</span>
+  <div class="who"><div class="seller">${t.s} ${tags}</div><div class="where">${t.c} · <span class="num">${t.dist.toLocaleString('en-US')}</span> mi from ABQ</div>
+  <div class="note">${t.n} <a href="${t.u}" target="_blank" rel="noopener">See listing ↗</a></div></div>
+  <div class="right"><div class="price">${money(t.p)}</div><div class="mi">${t.mi.toLocaleString('en-US')} mi</div><div class="meter" title="Miles out of 40,000"><span style="width:${Math.min(100,t.mi/400)}%"></span></div></div>`;
+  const box=l.querySelector('input');box.checked=picks.has(t.id);
+  box.addEventListener('change',()=>{box.checked?picks.add(t.id):picks.delete(t.id);sync();});
+  l.querySelector('a').addEventListener('click',e=>e.stopPropagation());
+  list.appendChild(l);}
+function flash(id){const c=document.getElementById('c-'+id);c.style.borderColor='var(--led)';setTimeout(()=>{c.style.borderColor='';},1200);}
+
+let filt='all',sort='price';
+function setFilter(f){filt=f;document.querySelectorAll('[data-f]').forEach(b=>b.setAttribute('aria-pressed',b.dataset.f===f));apply();}
+function apply(){const arr=[...trucks].sort((a,b)=>a[sort==='price'?'p':sort]-b[sort==='price'?'p':sort]);
+  for(const t of arr){const c=document.getElementById('c-'+t.id);c.hidden=!(filt==='all'||t.g===filt);list.appendChild(c);}}
+document.querySelectorAll('[data-f]').forEach(b=>b.addEventListener('click',()=>setFilter(b.dataset.f)));
+document.querySelectorAll('[data-s]').forEach(b=>b.addEventListener('click',()=>{sort=b.dataset.s;document.querySelectorAll('[data-s]').forEach(x=>x.setAttribute('aria-pressed',x===b));apply();}));
+
+const msg=document.getElementById('msg');
+function sync(){const on=trucks.filter(t=>picks.has(t.id));
+  for(const t of trucks){document.getElementById('c-'+t.id).classList.toggle('on',picks.has(t.id));pins[t.id].classList.toggle('on',picks.has(t.id));}
+  document.getElementById('count').textContent=on.length?`${on.length} ${on.length===1?'truck':'trucks'} picked`:'No trucks picked yet';
+  document.getElementById('total').textContent=money(on.reduce((s,t)=>s+t.p,0));
+  msg.hidden=true;try{localStorage.setItem('cb-picks',JSON.stringify([...picks]))}catch(e){}}
+document.getElementById('clear').addEventListener('click',()=>{picks.clear();document.querySelectorAll('.card input').forEach(i=>i.checked=false);sync();});
+document.getElementById('copy').addEventListener('click',()=>{const on=trucks.filter(t=>picks.has(t.id));
+  if(!on.length){msg.hidden=false;msg.textContent='Tap the trucks you want first.';return;}
+  const txt='Cyberbeast picks ('+on.length+', '+money(on.reduce((s,t)=>s+t.p,0))+' total):\n'+on.map((t,i)=>`${i+1}. ${t.s}, ${t.c}, ${t.mi.toLocaleString('en-US')} mi, ${money(t.p)}\n${t.u}`).join('\n');
+  const done=()=>{msg.hidden=false;msg.textContent='Copied. Paste it in a text to Cisco.';};
+  const fail=()=>{msg.hidden=false;msg.innerHTML='Copy this and text it to Cisco:';const ta=document.createElement('textarea');ta.value=txt;ta.readOnly=true;msg.appendChild(ta);ta.select();};
+  try{navigator.clipboard.writeText(txt).then(done,fail)}catch(e){fail()}});
+apply();sync();
+</script>
+
+</body>
+</html>
